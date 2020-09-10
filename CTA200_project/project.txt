@@ -1,0 +1,138 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\title{Simulation of bandwidth depolarization by Faraday rotation}
+\author{Maxwell A. Fine}
+\date{May 2020}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\subsection{Goals}
+To produce an accurate simulation of bandwidth depolarization by Faraday rotation. To verify the analytic solution proposed by Schnitzeler \& Lee (2015) by using the simulation and to test Brentjens & de Bruyn (2005) prediction of the 50\% depolarization threshold.
+
+\subsection{Bandwidth depolarization}
+Bandwidth depolarization is a phenomena that effects polarized radio emission, which undergo Faraday rotation, that we observe when using frequency channels that have non-zero bandwidth. We can simulate bandwidth depolarization by numerically integrating and averaging the complex polarization value per channel over our set of frequency channels.
+
+\subsection{Key equations}
+
+Complex polarization:
+\begin{equation}
+        \tilde{P} = Q + i U = P e^{2i\chi}
+\end{equation}
+Where $\tilde{P}$ is the complex polarization, Q and U are stokes parameters, and P is the polarized intensity, $\chi$ is the polarized angle.
+\vspace{1cm}
+
+Faraday rotation:
+\begin{equation}
+    \chi(\lambda^2) = \chi_0 + \lambda^2 \phi
+\end{equation}
+Where $\lambda$ is the wavelength of light, and $\phi$ is the Faraday depth.
+\vspace{1cm}
+
+Schnitzeler \& Lee Eqtn 13 (analytical prediction):
+\begin{equation}
+    \int e^{-2i\phi (c/\nu)^2} d\nu = e^{-2i\phi (c/\nu)^2} \nu + c \sqrt{|\phi|\pi} \times (i+\mathrm{sign}(\phi)) \times \mathrm{erf}\left[ \sqrt{|\phi|} \frac{c}{\nu} (i+\mathrm{sign}(\phi)) \right]
+\end{equation}
+\vspace{1cm}
+
+Predicted 50\% depolarization threshold (equation 63 of Brentjens \& de Bruyn 2005):
+\begin{equation}
+    |\phi_m_a_x| =  \frac{\sqrt{3}}{\delta \lambda^2}
+\end{equation}
+Where $\delta \lambda^2$ is the width of the channel in units of wavelength squared
+
+
+
+
+
+
+\section{Key steps and exercises}
+\subsection{Plotting Stokes parameters, polarized intensity and polarized angle (Ex.4)}
+
+In this exercise, we treat the frequency channels as delta functions that undergo Faraday rotation. We are asked to plot the resulting stokes parameters, polarized intensity and polarized angle and to confirm our expectations.
+
+Polarized intensity corresponds to the modulus of the complex polarization(equation 1). While the radio emission does undergo Faraday rotation, it will only effect polarized angle. Therefore we expect the polarized intensity to be a constant.
+
+Stokes Q \& U are the x and y components of the complex polarization. We then expect Q \& U to be  simple sinusoidal functions.
+
+We expect the polarized angle to decrease pseudo-linearly when we plot it as a function of frequency. As this is a simple modification of equation 2.
+
+The plots below confirm our expectations.
+
+
+
+
+\begin{figure*}[h!]
+    \centering
+    \begin{subfigure}[h]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{polarized.pdf}{a}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[h]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{stokes.pdf}{b}
+    \end{subfigure}
+
+    ~ 
+    \begin{subfigure}[h]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{anlge.pdf}{c}
+    \end{subfigure}
+    \caption{typical results expected from Faraday rotation, with a Faraday depth value of 150}
+\end{figure*}
+
+\pagebreak
+
+\subsection{Comparison of the analytical and Numerical solution for the channel polarization integral (Ex.9)}
+
+To verify the analytic solution proposed by Schnitzeler, we need to compare the results of the channel polarization integral. We cannot simply give a single number for percent error based on the modulus, as the relative phase is also of importance. Instead we must calculate the error in the real and imaginary components separately.
+
+Comparing the two, the results are the same to within 10\% error, both real and imaginary, for low Faraday depth values ($<$10,000 rad/m$^2$). Generally, the two solutions diverge more in the imaginary component.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.5]{compare.pdf}
+\caption{Comparison of the analytical and Numerical solution for the channel polarization integral, with a Faraday depth value of 150}
+\label{fig:Mandelbrot}
+\end{figure}
+\subsection{Bandwidth depolarization(Ex.10)}
+To further verify the analytic solution proposed by Schnitzeler we can plot both the numerical both solutions as functions of increasing Faraday depth, we see they give the same result.
+
+Comparing the Faraday depth of half max with the prediction from Brentjens \& de Bruyn
+(equation 4), we see the predicted value is off by less than 10\%. In our test specifically, it was off by 9\% using the 900 Mhz channel of EMU pilot survey.
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.5]{bandwidth_depolarization.pdf}
+\caption{Dashed red is the analytical solution, Blue is numerical, purple is half max}
+\label{fig:Mandelbrot}
+\end{figure}
+\pagebreak
+
+
+\subsection{\texttt{bandwidth\_depolarization\_sim.py} (Ex.11)}
+\texttt{bandwidth\_depolarization\_sim.py} is a python 3 program that can be called from the command line. It allows the user to provide values for lowest channel frequency, highest channel frequency, and number of channels. It first makes two plots, showing the bandwidth depolarization as a function of Faraday depth, for the highest and lowest frequency channels; it then generates a plot of Stokes parameters and polarized intensity vs frequency. For the later two, it uses the the Faraday depth value corresponding to the 50\% sensitivity point of the
+lowest frequency channel.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.5]{rm_simulator.pdf}
+\caption{Sample of the output from \texttt{bandwidth\_depolarization\_sim.py}}
+\label{fig:Mandelbrot}
+\end{figure}
+\pagebreak
+
+
+\end{document}
