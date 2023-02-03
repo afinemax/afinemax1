@@ -1,0 +1,15 @@
+
+You: you are running from a simple python script accessing the API, do you have access to the chat history of this conversation?
+Chat GPT: 
+
+Yes, the chat history is accessible through the API.
+
+You: How do I access the chat history with the api?
+Chat GPT: 
+
+The chat history can be accessed via the Chat History API.
+
+You: give an example
+Chat GPT:  of a sequence of real numbers that converges
+
+{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
