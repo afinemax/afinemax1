@@ -626,7 +626,7 @@ input, select, textarea {
 
 		.image:before {
 			pointer-events: none;
-			background-image: url("../../images/overlay.png");
+			background-image: url("../../images/overlay.png"); 
 			background-color: rgba(19, 21, 25, 0.5);
 			border-radius: 4px;
 			content: '';
@@ -1190,7 +1190,7 @@ input, select, textarea {
 			-webkit-transition: -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out;
 			-ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
 			transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
-			background-image: url("../../images/astron_1.jpg");  /* jwst_01.png background image astron_1.jpg Image credit: Jan van Muijlwijk */ 
+			background-image: url("../../images/chime_landscape.jpeg");  /* jwst_01.png background image astron_1.jpg Image credit: Jan van Muijlwijk */ 
 			background-position: center;
 			background-size: cover;
 			background-repeat: no-repeat;
