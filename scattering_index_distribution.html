@@ -4074,7 +4074,7 @@ const TEXT_COLOR = "#FFFFFF";
 const FRAME_COLOR = "#FFFFFF";
 
 
-const SHOW_HISTOGRAM = true;
+const SHOW_HISTOGRAM = false;
 
 const HISTOGRAM_ALPHA = 0.3;
 
@@ -4325,7 +4325,7 @@ function makeGaussianCurve(
 // ============================================================
 // Histogram
 //
-// Uses n_bins = int(sqrt(n))
+// n_bins = int(sqrt(n)) PER POPULATION
 // Matching population color
 // alpha = 0.3
 // Black edge
@@ -4836,8 +4836,6 @@ function updatePlot() {
 
     // ========================================================
     // Mean lines
-    //
-    // WHITE + SOLID
     // ========================================================
 
     const shapes = [];
@@ -5108,10 +5106,6 @@ document
         updatePlot
     );
 
-
-// ============================================================
-// Initial plot
-// ============================================================
 
 updatePlot();
 
