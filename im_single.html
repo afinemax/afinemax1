@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>I'm single, want to date?</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        min-height: 100%;
+        background: #111;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+
+        color: #f2f2f2;
+
+        font-family:
+            -apple-system, BlinkMacSystemFont,
+            "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+        /* =========================
+           BACKGROUND PHOTO
+           ========================= */
+
+        background-image:
+            linear-gradient(
+                rgba(0, 0, 0, 0.45),
+                rgba(0, 0, 0, 0.45)
+            ),
+            url("images/chime_landscape.jpeg");
+
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+
+    .page {
+        max-width: 480px;
+        margin: 0 auto;
+        padding-bottom: 40px;
+
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+    }
+
+
+    /* =========================
+       PAGE TITLE
+       ========================= */
+
+    .page-title {
+        background: rgba(18, 18, 18, 0.97);
+
+        padding: 28px 24px 22px;
+
+        text-align: center;
+
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1.2;
+
+        color: #ffffff;
+    }
+
+
+    /* =========================
+       PHOTO CAROUSEL
+       ========================= */
+
+    .photo-container {
+        position: relative;
+        width: 100%;
+        height: 580px;
+        overflow: hidden;
+        background: #222;
+    }
+
+    .photo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        width: 42px;
+        height: 42px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: rgba(20, 20, 20, 0.75);
+        color: #fff;
+
+        font-size: 22px;
+        cursor: pointer;
+
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .arrow:hover {
+        background: rgba(40, 40, 40, 0.95);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .arrow-left {
+        left: 14px;
+    }
+
+    .arrow-right {
+        right: 14px;
+    }
+
+
+    /* =========================
+       PHOTO INDICATORS
+       ========================= */
+
+    .photo-dots {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        right: 14px;
+
+        display: flex;
+        gap: 5px;
+    }
+
+    .dot {
+        height: 4px;
+        flex: 1;
+
+        background: rgba(255, 255, 255, 0.35);
+        border-radius: 10px;
+
+        transition: background 0.2s ease;
+
+        cursor: pointer;
+    }
+
+    .dot.active {
+        background: white;
+    }
+
+
+    /* =========================
+       PROFILE
+       ========================= */
+
+    .profile {
+        background: rgba(18, 18, 18, 0.97);
+        padding: 28px 24px 35px;
+    }
+
+    h1 {
+        margin: 0;
+
+        font-size: 2.1rem;
+        line-height: 1.1;
+
+        color: #ffffff;
+    }
+
+    .subtitle {
+        margin-top: 7px;
+
+        font-size: 1rem;
+        color: #aaa;
+    }
+
+    .bio {
+        margin-top: 25px;
+
+        font-size: 1.05rem;
+        line-height: 1.6;
+
+        color: #e2e2e2;
+    }
+
+
+    /* =========================
+       PROMPTS
+       ========================= */
+
+    .prompt {
+        margin-top: 20px;
+
+        padding: 18px;
+
+        background: #242424;
+        border-radius: 16px;
+
+        border: 1px solid #303030;
+    }
+
+    .prompt-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+
+        color: #999;
+
+        margin-bottom: 7px;
+    }
+
+    .prompt-text {
+        font-size: 1rem;
+        line-height: 1.45;
+
+        color: #ededed;
+    }
+
+
+    /* =========================
+       INTERESTS
+       ========================= */
+
+    .interests {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        margin-top: 24px;
+    }
+
+    .interest {
+        padding: 8px 12px;
+
+        border-radius: 999px;
+
+        background: #292929;
+        border: 1px solid #363636;
+
+        color: #e5e5e5;
+
+        font-size: 0.9rem;
+    }
+
+
+    /* =========================
+       INSTAGRAM
+       ========================= */
+
+    .instagram {
+        display: block;
+
+        margin-top: 30px;
+        padding: 14px;
+
+        text-align: center;
+
+        border-radius: 12px;
+
+        background: #f0f0f0;
+        color: #111;
+
+        text-decoration: none;
+        font-weight: 600;
+
+        transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .instagram:hover {
+        background: #ffffff;
+        transform: translateY(-1px);
+    }
+
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .footer {
+        text-align: center;
+
+        margin-top: 25px;
+
+        color: #666;
+        font-size: 0.8rem;
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 600px) {
+
+        body {
+            background-attachment: scroll;
+        }
+
+        .page {
+            box-shadow: none;
+        }
+
+        .page-title {
+            padding-left: 20px;
+            padding-right: 20px;
+
+            font-size: 1.6rem;
+        }
+
+        .photo-container {
+            height: 580px;
+        }
+
+        .profile {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="page">
+
+```
+<!-- =========================
+     PAGE TITLE
+     ========================= -->
+
+<div class="page-title">
+    I'm single, want to date?
+</div>
+
+
+<!-- =========================
+     PHOTO CAROUSEL
+     ========================= -->
+
+<div class="photo-container">
+
+    <img
+        id="profile-photo"
+        src="images/max_fine_mcgill_1.jpg"
+        alt="Max"
+    >
+
+    <button
+        class="arrow arrow-left"
+        onclick="previousPhoto()"
+        aria-label="Previous photo"
+    >
+        ‹
+    </button>
+
+    <button
+        class="arrow arrow-right"
+        onclick="nextPhoto()"
+        aria-label="Next photo"
+    >
+        ›
+    </button>
+
+    <!-- Dots are automatically generated -->
+    <div
+        class="photo-dots"
+        id="photo-dots"
+    ></div>
+
+</div>
+
+
+<!-- =========================
+     PROFILE
+     ========================= -->
+
+<div class="profile">
+
+    <h1>Max, 26</h1>
+
+    <div class="subtitle">
+        📍 Montréal · PhD student · he/him
+    </div>
+
+
+    <div class="bio">
+
+        I'm a PhD student in astrophysics who spends
+        an unreasonable amount of time thinking about
+        things that happened billions of years ago.
+
+        <br><br>
+
+        When I'm not studying the stars, I'm probably hunting
+        for a good café, throwing a frisbee, reading,
+        exploring the city, or hosting my friends for pancakes and boardgames.
+
+        <br><br>
+
+        Looking for something, that will hopefully be serious. 
+
+
+    </div>
+
+
+    <!-- =========================
+         PROMPTS
+         ========================= -->
+
+    <div class="prompt">
+
+        <div class="prompt-title">
+            A perfect weekend
+        </div>
+
+        <div class="prompt-text">
+            Coffee → wandering around Montréal →
+            something outdoors → cooking dinner →
+            staying up way too late talking about
+            absolutely everything.
+        </div>
+
+    </div>
+
+
+    <div class="prompt">
+
+        <div class="prompt-title">
+            Green flags
+        </div>
+
+        <div class="prompt-text">
+            Curious people, kindness, good conversation,
+            being excited about your weird little interests,
+            and sending me things you think I'd find interesting.
+        </div>
+
+    </div>
+
+
+    <div class="prompt">
+
+        <div class="prompt-title">
+            We should definitely...
+        </div>
+
+        <div class="prompt-text">
+            Get coffee. ☕
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         INTERESTS
+         ========================= -->
+
+    <div class="interests">
+
+        <span class="interest">🪐 Astronomy</span>
+        <span class="interest">☕ Cafés</span>
+        <span class="interest">🥏 Frisbee</span>
+        <span class="interest">📚 Reading</span>
+        <span class="interest">🌱 Gardening</span>
+        <span class="interest">🍞 Baking</span>
+        <span class="interest">🎨 Painting</span>
+        <span class="interest">💻 Coding</span>
+        <span class="interest">🥾 Exploring</span>
+
+    </div>
+
+
+    <!-- =========================
+         INSTAGRAM
+         ========================= -->
+
+    <a
+        class="instagram"
+        href="https://www.instagram.com/afinemax/?hl=en"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        📷 Instagram
+    </a>
+
+
+    <div class="footer">
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+    /*
+     * =========================
+     * PHOTO LIST
+     * =========================
+     *
+     * Add or remove photos here.
+     *
+     * The carousel and indicators
+     * automatically adapt to the
+     * number of photos in this list.
+     */
+
+    const photos = [
+        "images/max_fine_mcgill_1.jpg",
+        "images/dating_app/pottery_cafe_me.jpeg",
+        "images/dating_app/me_and_oupa.jpeg",
+        "images/dating_app/bw_me.jpeg",
+        "images/dating_app/ice_skating_amsterdam.jpeg",
+        "images/dating_app/max_strawberries.jpeg",
+        "images/dating_app/me_and_family.jpeg"
+    ];
+
+
+    /*
+     * =========================
+     * CAROUSEL SETUP
+     * =========================
+     */
+
+    let currentPhoto = 0;
+
+    const image =
+        document.getElementById("profile-photo");
+
+    const dotsContainer =
+        document.getElementById("photo-dots");
+
+
+    /*
+     * =========================
+     * CREATE PHOTO INDICATORS
+     * =========================
+     *
+     * One indicator is created
+     * for every photo in the list.
+     */
+
+    photos.forEach((photo, index) => {
+
+        const dot =
+            document.createElement("div");
+
+        dot.classList.add("dot");
+
+        if (index === 0) {
+            dot.classList.add("active");
+        }
+
+        dot.setAttribute(
+            "aria-label",
+            "Go to photo " + (index + 1)
+        );
+
+        dot.addEventListener(
+            "click",
+            function() {
+                showPhoto(index);
+            }
+        );
+
+        dotsContainer.appendChild(dot);
+
+    });
+
+
+    const dots =
+        document.querySelectorAll(".dot");
+
+
+    /*
+     * =========================
+     * SHOW PHOTO
+     * =========================
+     */
+
+    function showPhoto(index) {
+
+        currentPhoto = index;
+
+        image.src =
+            photos[currentPhoto];
+
+        dots.forEach((dot, i) => {
+
+            dot.classList.toggle(
+                "active",
+                i === currentPhoto
+            );
+
+        });
+
+    }
+
+
+    /*
+     * =========================
+     * NEXT PHOTO
+     * =========================
+     */
+
+    function nextPhoto() {
+
+        currentPhoto =
+            (currentPhoto + 1)
+            % photos.length;
+
+        showPhoto(currentPhoto);
+
+    }
+
+
+    /*
+     * =========================
+     * PREVIOUS PHOTO
+     * =========================
+     */
+
+    function previousPhoto() {
+
+        currentPhoto =
+            (currentPhoto - 1 + photos.length)
+            % photos.length;
+
+        showPhoto(currentPhoto);
+
+    }
+
+
+    /*
+     * =========================
+     * SWIPE SUPPORT
+     * =========================
+     */
+
+    let touchStartX = 0;
+
+
+    image.addEventListener(
+        "touchstart",
+        function(e) {
+
+            touchStartX =
+                e.changedTouches[0].screenX;
+
+        }
+    );
+
+
+    image.addEventListener(
+        "touchend",
+        function(e) {
+
+            const touchEndX =
+                e.changedTouches[0].screenX;
+
+
+            if (
+                touchEndX <
+                touchStartX - 50
+            ) {
+                nextPhoto();
+            }
+
+
+            if (
+                touchEndX >
+                touchStartX + 50
+            ) {
+                previousPhoto();
+            }
+
+        }
+    );
+
+
+    /*
+     * =========================
+     * HIDE NAVIGATION IF ONLY
+     * ONE PHOTO EXISTS
+     * =========================
+     */
+
+    if (photos.length <= 1) {
+
+        document.querySelector(
+            ".arrow-left"
+        ).style.display = "none";
+
+        document.querySelector(
+            ".arrow-right"
+        ).style.display = "none";
+
+        dotsContainer.style.display = "none";
+
+    }
+
+</script>
+
+</body>
+</html>
