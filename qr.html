@@ -1,0 +1,44 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+
+    <script>
+        // ============================================================
+        // CHANGE THE REDIRECT HERE
+        // ============================================================
+
+        // Rick Roll
+        const redirectUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+        // Other options — uncomment ONE and comment out the current one:
+        // const redirectUrl = "https://afinemax.github.io/afinemax1/";
+        // const redirectUrl = "https://www.google.com/";
+        // const redirectUrl = "https://en.wikipedia.org/wiki/Main_Page";
+
+        // ============================================================
+        // DO NOT EDIT BELOW THIS LINE
+        // ============================================================
+
+        window.location.replace(redirectUrl);
+    </script>
+</head>
+
+<body>
+    <p>Redirecting...</p>
+
+    <p>
+        If you aren't redirected,
+        <a id="redirect-link" href="#">click here</a>.
+    </p>
+
+    <script>
+        // Make the fallback link use the same destination
+        document.getElementById("redirect-link").href = redirectUrl;
+    </script>
+</body>
+</html>
+```
